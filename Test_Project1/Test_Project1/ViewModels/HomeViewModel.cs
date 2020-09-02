@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -85,26 +84,6 @@ namespace Test_Project1.ViewModels
             }
             else
                 await _pageService.DisplayAlert("Alert", "Something went wrong", "Ok");
-
-            //var usersInDb = (await _connection.Table<User>()
-            //    .OrderByDescending(u => u.LoggedInTime)
-            //    .ToListAsync());
-
-            //var response = await _connection.DeleteAsync<User>(usersInDb[0].Email);
-
-            //if (response == 1)
-            //{
-            //    if (usersInDb.Count <= 1)
-            //        await _pageService.PopToRootAsync();
-
-            //    else
-            //    {
-            //        User = usersInDb[1];
-            //        InitializingBusinessListView(usersInDb[1].Email);
-            //    }
-            //}
-            //else
-            //    await _pageService.DisplayAlert("Alert", "Something went wrong", "Ok");
         }
 
         private void InitializingBusinessListView(string email)
@@ -114,21 +93,7 @@ namespace Test_Project1.ViewModels
 
         public async Task SaveOrUpdateUserIntoDb()
         {
-            await _connection.CreateTableAsync<User>();
-
-            var userInDb = await _connection.Table<User>()
-                .FirstOrDefaultAsync(u => u.Email == User.Email);
-
-            if (userInDb == null)
-                await _connection.InsertAsync(User);
-
-            if (userInDb != null)
-            {
-                await _connection.DeleteAsync<User>(userInDb.Email);
-
-                User.LoggedInTime = DateTime.Now;
-                await _connection.InsertAsync(User);
-            }
+            await _homeViewModelService.SaveOrUpdateUserInDb(User);
         }
     }
 }

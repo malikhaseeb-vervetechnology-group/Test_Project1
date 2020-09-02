@@ -29,24 +29,38 @@ namespace Test_Project1.Services
                 .ToListAsync());
         }
 
-        public async Task SaveOrUpdateUserInDb(User user)
+        public async Task<bool> IsUserAlreadyExists(User user)
         {
             await _connection.CreateTableAsync<User>();
 
             var userInDb = await _connection.Table<User>()
                 .FirstOrDefaultAsync(u => u.Email == user.Email);
 
-            if (userInDb == null)
-                await _connection.InsertAsync(user);
+            return userInDb != null;
+        }
 
-            else
-            {
-                await _connection.DeleteAsync<User>(userInDb.Email);
+        public async Task SaveNewUserInDb(User user)
+        {
+            await _connection.CreateTableAsync<User>();
 
-                user.LoggedInTime = DateTime.Now;
-                await _connection.InsertAsync(user);
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
 
-            }
+            await _connection.InsertAsync(user);
+        }
+
+        public async Task UpdateUserLoggedInTime(User user)
+        {
+            await _connection.CreateTableAsync<User>();
+
+
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            await _connection.DeleteAsync<User>(user.Email);
+
+            user.LoggedInTime = DateTime.Now;
+            await _connection.InsertAsync(user);
         }
     }
 }

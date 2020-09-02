@@ -1,10 +1,8 @@
-﻿using SQLite;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Test_Project1.Models;
 using Test_Project1.Pages.Syncfusion_Charts;
-using Test_Project1.Persistence;
 using Test_Project1.Services;
 using Xamarin.Forms;
 
@@ -16,7 +14,6 @@ namespace Test_Project1.ViewModels
         private readonly HomeViewModelService _homeViewModelService;
 
         private Business _selectedBusiness;
-        private readonly SQLiteAsyncConnection _connection;
 
         private readonly BusinessService _businessService = new BusinessService();
 
@@ -43,8 +40,6 @@ namespace Test_Project1.ViewModels
 
             User = user;
             InitializingBusinessListView(user.Email);
-            _connection = DependencyService.Get<ISqLiteDb>().GetConnection();
-
         }
 
         private async Task BusinessSelected(Business business)
@@ -93,7 +88,12 @@ namespace Test_Project1.ViewModels
 
         public async Task SaveOrUpdateUserIntoDb()
         {
-            await _homeViewModelService.SaveOrUpdateUserInDb(User);
+            var isExists = await _homeViewModelService.IsUserAlreadyExists(User);
+
+            if (isExists)
+                await _homeViewModelService.UpdateUserLoggedInTime(User);
+            else
+                await _homeViewModelService.SaveNewUserInDb(User);
         }
     }
 }

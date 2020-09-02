@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+             NavigationPage.HasBackButton="False"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Test_Project1.Models;assembly=Test_Project1"
+             x:Class="Test_Project1.Services.HomePage"
+             Title="{Binding User.Name}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Manage Accounts" Order="Secondary" Clicked="ManageAccounts_OnClicked"/>
+        <ToolbarItem Text="Sign out" Order="Secondary" Command="{Binding SignOutCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ListView 
+        x:Name="BusinessListView"
+        SelectedItem="{Binding SelectedBusiness, Mode=TwoWay}"
+        ItemsSource="{Binding Businesses}"
+        ItemSelected="BusinessListView_OnItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Name}" x:DataType="models:Business" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

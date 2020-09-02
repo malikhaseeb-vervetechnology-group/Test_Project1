@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:syncfusionViewModels="clr-namespace:Test_Project1.Syncfusion_ViewModels;assembly=Test_Project1"
+             x:Class="Test_Project1.Pages.Syncfusion_Charts.WaterfallChartPage">
+
+    <ContentPage.BindingContext>
+        <syncfusionViewModels:WaterfallChartViewModel/>
+    </ContentPage.BindingContext>
+
+    <xForms:SfChart>
+
+        <xForms:SfChart.PrimaryAxis>
+
+            <xForms:CategoryAxis />
+
+        </xForms:SfChart.PrimaryAxis>
+
+        <xForms:SfChart.SecondaryAxis>
+
+            <xForms:NumericalAxis />
+
+        </xForms:SfChart.SecondaryAxis>
+
+        <xForms:WaterfallSeries ItemsSource="{Binding Data}" XBindingPath="Category" YBindingPath="Value" SummaryBindingPath="IsSummary"/>
+
+    </xForms:SfChart>
+
+</ContentPage>

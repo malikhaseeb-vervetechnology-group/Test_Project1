@@ -11,7 +11,7 @@ namespace Test_Project1.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         private readonly IPageService _pageService;
-        private readonly HomeViewModelService _homeViewModelService;
+        private readonly IHomeViewModelService _homeViewModelService;
 
         private Business _selectedBusiness;
 
@@ -22,7 +22,7 @@ namespace Test_Project1.ViewModels
         public ICommand SignOutCommand { get; }
         public ICommand SelectBusinessListCommand { get; }
 
-        public User User { get; private set; }
+        public User User { get; set; } // I have to modify set to private 
         public Business SelectedBusiness
         {
             get => _selectedBusiness;
@@ -31,7 +31,9 @@ namespace Test_Project1.ViewModels
         public ObservableCollection<Business> Businesses { get; private set; }
             = new ObservableCollection<Business>();
 
-        public HomeViewModel(User user, IPageService pageService, HomeViewModelService homeViewModelService)
+        public HomeViewModel(
+            User user,
+            IPageService pageService, IHomeViewModelService homeViewModelService)
         {
             _pageService = pageService;
             _homeViewModelService = homeViewModelService;
@@ -42,7 +44,7 @@ namespace Test_Project1.ViewModels
             InitializingBusinessListView(user.Email);
         }
 
-        private async Task BusinessSelected(Business business)
+        public async Task BusinessSelected(Business business) // Make this method to private
         {
             if (business == null)
                 return;

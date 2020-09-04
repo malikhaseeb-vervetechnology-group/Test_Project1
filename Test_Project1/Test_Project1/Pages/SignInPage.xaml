@@ -3,18 +3,19 @@
              NavigationPage.HasNavigationBar="False"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Test_Project1.ViewModels;assembly=Test_Project1"
              x:Class="Test_Project1.Pages.SignInPage"
              Padding="20">
     
-    <StackLayout VerticalOptions="Center">
-        <Entry Placeholder="Email" x:Name="EmailEntry"/>
-        <Entry Placeholder="Password" IsPassword="True" x:Name="PasswordEntry"/>
+    <StackLayout VerticalOptions="Center" x:DataType="viewModels:SignInViewModel">
+        <Entry Placeholder="Email" Text="{Binding EmailEntry}"/>
+        <Entry Placeholder="Password" Text="{Binding PasswordEntry}" IsPassword="True"/>
 
         <Button 
+            Command="{Binding LoginCommand}"
             Text="Login" 
             Margin="0, 10, 0, 0" 
-            CornerRadius="10"
-            Clicked="Login_OnClicked"/>
+            CornerRadius="10"/>
     </StackLayout>
 
 </ContentPage>

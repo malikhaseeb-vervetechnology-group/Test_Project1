@@ -28,8 +28,7 @@ namespace Test_Project1.Services
         protected override void OnAppearing()
         {
             ViewModel = new HomeViewModel(_user, new PageService(), new HomeViewModelService());
-
-            ViewModel?.SaveOrUpdateUserIntoDb();
+            //ViewModel?.SaveOrUpdateUserIntoDb();
         }
 
         protected override bool OnBackButtonPressed()

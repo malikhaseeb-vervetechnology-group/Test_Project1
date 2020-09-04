@@ -77,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FakeServices\FakeHomeViewModelService.cs" />
-    <Compile Include="HomeTests.cs" />
     <Compile Include="HomeViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

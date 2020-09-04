@@ -42,6 +42,7 @@ namespace Test_Project1.ViewModels
 
             User = user;
             InitializingBusinessListView(user.Email);
+            SaveOrUpdateUserIntoDb();
         }
 
         public async Task BusinessSelected(Business business) // Make this method to private

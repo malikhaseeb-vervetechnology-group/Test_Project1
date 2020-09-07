@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Test_Project1.Models;assembly=Test_Project1"
+             xmlns:viewModels="clr-namespace:Test_Project1.ViewModels;assembly=Test_Project1"
              x:Class="Test_Project1.Pages.ManageAccounts">
 
     <StackLayout>
@@ -12,13 +13,17 @@
             <Label Text="Manage Accounts"/>
         </Frame>
 
-        <ListView x:Name="UserAccountsListView" ItemSelected="UserAccountSelected">
+        <ListView 
+            x:Name="UserAccountsListView"
+            ItemSelected="UserAccountSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell x:DataType="models:User">
                         <StackLayout Orientation="Horizontal" Padding="10">
                             <Label Text="{Binding Email}"/>
-                            <Label Text="{Binding LoggedInTime}" HorizontalOptions="EndAndExpand"/>
+                            <Label 
+                                Text="{Binding LoggedInTime}" 
+                                HorizontalOptions="EndAndExpand"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

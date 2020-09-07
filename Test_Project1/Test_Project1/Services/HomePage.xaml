@@ -4,6 +4,7 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Test_Project1.Models;assembly=Test_Project1"
+             xmlns:viewModels="clr-namespace:Test_Project1.ViewModels;assembly=Test_Project1"
              x:Class="Test_Project1.Services.HomePage"
              Title="{Binding User.Name}">
     
@@ -13,10 +14,10 @@
     </ContentPage.ToolbarItems>
 
     <ListView 
-        x:Name="BusinessListView"
         SelectedItem="{Binding SelectedBusiness, Mode=TwoWay}"
         ItemsSource="{Binding Businesses}"
-        ItemSelected="BusinessListView_OnItemSelected">
+        ItemSelected="BusinessListView_OnItemSelected" 
+        x:DataType="viewModels:HomeViewModel">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell Text="{Binding Name}" x:DataType="models:Business" />

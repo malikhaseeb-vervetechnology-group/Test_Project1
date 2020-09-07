@@ -4,7 +4,7 @@ using Test_Project1.Models;
 
 namespace Test_Project1.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly List<User> _users = new List<User>()
         {

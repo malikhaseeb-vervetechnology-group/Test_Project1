@@ -1,4 +1,5 @@
-﻿using Test_Project1.ViewModels;
+﻿using Test_Project1.Services;
+using Test_Project1.ViewModels;
 using Xamarin.Forms.Xaml;
 
 namespace Test_Project1.Pages
@@ -9,7 +10,7 @@ namespace Test_Project1.Pages
         public SignInPage()
         {
             InitializeComponent();
-            ViewModel = new SignInViewModel(new PageService());
+            ViewModel = new SignInViewModel(new PageService(), new UserService());
 
         }
 

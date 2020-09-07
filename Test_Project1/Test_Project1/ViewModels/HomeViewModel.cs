@@ -86,7 +86,8 @@ namespace Test_Project1.ViewModels
 
         private void InitializingBusinessListView(string email)
         {
-            Businesses = new ObservableCollection<Business>(_businessService.GetUserBusinesses(email));
+            Businesses = new ObservableCollection<Business>(
+                _businessService.GetUserBusinesses(email));
         }
 
         public async Task SaveOrUpdateUserIntoDb()

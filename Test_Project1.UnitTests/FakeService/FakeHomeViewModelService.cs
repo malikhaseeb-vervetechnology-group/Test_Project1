@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Test_Project1.Models;
 using Test_Project1.Services;
 
-namespace Test_Project1.UnitTests.FakeServices
+namespace Test_Project1.UnitTests.FakeService
 {
     public class FakeHomeViewModelService : IHomeViewModelService
     {

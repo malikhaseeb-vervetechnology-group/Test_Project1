@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Test_Project1.Models;
 using Test_Project1.Services;
-using Test_Project1.UnitTests.FakeServices;
+using Test_Project1.UnitTests.FakeService;
 using Test_Project1.ViewModels;
 
 namespace Test_Project1.UnitTests

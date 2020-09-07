@@ -17,7 +17,6 @@ namespace Test_Project1.Pages
         public ManageAccounts()
         {
             InitializeComponent();
-
             _connection = DependencyService.Get<ISqLiteDb>().GetConnection();
         }
 

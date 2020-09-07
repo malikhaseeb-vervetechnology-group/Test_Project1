@@ -5,17 +5,25 @@ using Xamarin.Forms;
 
 namespace Test_Project1.ViewModels
 {
-    public class SignInViewModel
+    public class SignInViewModel : BaseViewModel
     {
         private readonly IPageService _pageService;
+        private readonly IUserService _userService;
+        private string _passwordEntry;
+
         public string EmailEntry { get; set; }
-        public string PasswordEntry { get; set; }
 
-        private readonly UserService _userService = new UserService();
-        public ICommand LoginCommand { get; set; }
-
-        public SignInViewModel(IPageService pageService)
+        public string PasswordEntry
         {
+            get => _passwordEntry;
+            set => SetValue(ref _passwordEntry, value);
+        }
+
+        public ICommand LoginCommand { get; }
+
+        public SignInViewModel(IPageService pageService, IUserService userService)
+        {
+            _userService = userService;
             _pageService = pageService;
             LoginCommand = new Command(async () => await LogIn());
         }
@@ -38,7 +46,6 @@ namespace Test_Project1.ViewModels
 
             PasswordEntry = "";
             await _pageService.PushAsync(new HomePage(user));
-
         }
     }
 }

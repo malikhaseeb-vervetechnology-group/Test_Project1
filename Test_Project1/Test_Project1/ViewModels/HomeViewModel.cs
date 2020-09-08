@@ -45,7 +45,7 @@ namespace Test_Project1.ViewModels
             SaveOrUpdateUserIntoDb();
         }
 
-        public async Task BusinessSelected(Business business) // Make this method to private
+        private async Task BusinessSelected(Business business)
         {
             if (business == null)
                 return;

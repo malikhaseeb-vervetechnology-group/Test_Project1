@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using Test_Project1.Models;
+using Test_Project1.Pages.Syncfusion_Charts;
 using Test_Project1.Services;
 using Test_Project1.ViewModels;
 
@@ -24,17 +25,47 @@ namespace Test_Project1.UnitTests
             _viewModel = new HomeViewModel(_userMock.Object, _pageServiceMock.Object, _homeViewModelService.Object);
         }
 
-        //[Test]
-        //public void BusinessSelected_WhenCalledAndTapOnPieChart_ShouldNavigateTheUserToPieChartPage()
-        //{
-        //    var business = new Business();
-        //    _homeViewModel.Businesses.Add(business);
+        [Test]
+        public void BusinessSelected_WhenTaped_ShowDisplayActionSheet()
+        {
+            _viewModel.SelectBusinessListCommand.Execute(new Business());
 
-        //    _homeViewModel.SelectBusinessListCommand.Execute(business);
+            _pageServiceMock.Verify(p => p.DisplayActionSheet(
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string[]>()),
+                Times.AtLeastOnce);
+        }
 
+        [Test]
+        public void BusinessSelected_PieChartSelect_NavigateToPieChartPage()
+        {
+            _pageServiceMock.Setup(p => p.DisplayActionSheet(It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string[]>())).ReturnsAsync("PieChart");
 
-        //    _pageServiceMock.Verify(p => p.PushAsync(It.IsAny<PieChartPage>()));
-        //}
+            _viewModel.SelectBusinessListCommand.Execute(new Business());
+
+            _pageServiceMock.Verify();
+            _pageServiceMock.Verify(p => p.PushAsync(It.IsAny<PieChartPage>()), Times.AtLeastOnce);
+            _pageServiceMock.VerifyNoOtherCalls();
+        }
+
+        [Test]
+        public void BusinessSelected_WaterFallChartSelect_NavigateToWaterfallChartPage()
+        {
+            _pageServiceMock.Setup(p => p.DisplayActionSheet(It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string>(),
+                It.IsAny<string[]>())).ReturnsAsync("WaterfallChart");
+
+            _viewModel.SelectBusinessListCommand.Execute(new Business());
+
+            _pageServiceMock.Verify(p => p.PushAsync(It.IsAny<WaterfallChartPage>()), Times.AtLeastOnce);
+        }
+
 
         [Test]
         public void Businesses_WhenCalled_ShouldPopulateWithBusinessList()
